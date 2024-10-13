@@ -1,13 +1,19 @@
-const SearchBar = ({ onSearch }) => {
+import toast from 'react-hot-toast';
+
+const SearchBar = ({ onSubmit }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
     const topic = form.elements.topic.value;
     if (form.elements.topic.value.trim() === '') {
-      return;
+      toast.error('The search field cannot be empty', {
+        position: 'top-center',
+        duration: 2000,
+      });
+    } else {
+      onSubmit(topic);
+      form.reset();
     }
-    onSearch(topic);
-    form.reset();
   };
   return (
     <header>
