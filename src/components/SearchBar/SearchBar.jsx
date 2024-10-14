@@ -1,31 +1,32 @@
 import toast from 'react-hot-toast';
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar = ({ setValue, resetSubmit }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
-    const form = evt.target;
-    const topic = form.elements.topic.value;
-    if (form.elements.topic.value.trim() === '') {
+    const inputValue = evt.target.elements.input.value.trim();
+    if (!inputValue) {
       toast.error('The search field cannot be empty', {
         position: 'top-center',
         duration: 2000,
       });
     } else {
-      onSubmit(topic);
-      form.reset();
+      resetSubmit();
+      setValue(inputValue);
+      evt.target.reset();
     }
   };
+
   return (
     <header>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="topic"
+          name="input"
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
         />
-        <button>Search</button>
+        <button type="submit">Search</button>
       </form>
     </header>
   );
