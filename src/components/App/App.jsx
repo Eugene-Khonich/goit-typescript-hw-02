@@ -7,6 +7,7 @@ import ImageGallery from '../ImageGallery/ImageGallery';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
+import ImageModal from '../ImageModal/ImageModal';
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -16,6 +17,10 @@ const App = () => {
   const [value, setValue] = useState('');
   const [lastPage, setLastPage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalImg, setModalImg] = useState('');
+  const [modalDesc, setModalDesc] = useState('');
+  const [modalAlt, setModalAlt] = useState('');
 
   useEffect(() => {
     const fetchPhotosHandler = async () => {
@@ -55,6 +60,18 @@ const App = () => {
     setValue('');
     setImages([]);
   };
+
+  const openModal = (imgUrl, desc, altDesc) => {
+    setModalIsOpen(true);
+    setModalImg(imgUrl);
+    setModalDesc(desc);
+    setModalAlt(altDesc);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div>
       <Toaster />
@@ -62,11 +79,18 @@ const App = () => {
       {error && <ErrorMessage errorMessage={errorMessage} />}
       {images.length > 0 && (
         <>
-          <ImageGallery images={images} />
+          <ImageGallery images={images} openModal={openModal} />
           {!lastPage && <LoadMoreBtn reachPage={reachPage} />}
         </>
       )}
       {loading && <Loader />}
+      <ImageModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        modalImg={modalImg}
+        modalDesc={modalDesc}
+        modalAlt={modalAlt}
+      />
     </div>
   );
 };

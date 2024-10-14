@@ -1,7 +1,20 @@
-const ImageCard = ({ urls, likes, description, alt_description, user }) => {
+const ImageCard = ({
+  urls,
+  likes,
+  description,
+  alt_description,
+  user,
+  openModal,
+}) => {
   return (
     <div>
-      <img src={urls.small} alt={alt_description} />
+      <img
+        src={urls.small}
+        alt={alt_description}
+        onClick={() => {
+          openModal(urls.regular, description, alt_description);
+        }}
+      />
       <ul>
         <li>{description}</li>
         <li>
