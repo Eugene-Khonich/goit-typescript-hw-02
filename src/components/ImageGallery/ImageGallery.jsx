@@ -6,7 +6,7 @@ const ImageGallery = ({ images, openModal }) => {
       {images.map(item => (
         <li key={item.id}>
           <ImageCard
-            urls={item.urls.small}
+            urls={item.urls}
             alt_description={item.alt_description}
             likes={item.likes}
             user={item.user}
