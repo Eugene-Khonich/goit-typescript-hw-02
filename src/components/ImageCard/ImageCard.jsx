@@ -1,3 +1,5 @@
+import css from './ImageCard.module.css';
+
 const ImageCard = ({
   urls,
   likes,
@@ -7,7 +9,7 @@ const ImageCard = ({
   openModal,
 }) => {
   return (
-    <div>
+    <div className={css.card}>
       <img
         src={urls.small}
         alt={alt_description}
@@ -16,7 +18,6 @@ const ImageCard = ({
         }}
       />
       <ul>
-        <li>{description}</li>
         <li>
           {user.first_name} {user.last_name}
         </li>

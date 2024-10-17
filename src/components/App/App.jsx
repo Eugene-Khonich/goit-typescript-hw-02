@@ -1,4 +1,4 @@
-import './App.module.css';
+import css from './App.module.css';
 import fetchImg from '../../api';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
@@ -73,7 +73,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className={css.container}>
       <Toaster />
       <SearchBar setValue={setValue} resetSubmit={resetSubmit} />
       {error && <ErrorMessage errorMessage={errorMessage} />}

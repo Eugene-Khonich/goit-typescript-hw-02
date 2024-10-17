@@ -1,0 +1,11 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.card {
+  width: calc((100% - 30px) / 4);
+  max-height: 300px;
+  overflow: hidden;
+}
