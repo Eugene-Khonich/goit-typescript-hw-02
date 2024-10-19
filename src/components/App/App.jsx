@@ -21,6 +21,8 @@ const App = () => {
   const [modalImg, setModalImg] = useState('');
   const [modalDesc, setModalDesc] = useState('');
   const [modalAlt, setModalAlt] = useState('');
+  const [modalUser, setModalUser] = useState('');
+  const [modalLikes, setModalLikes] = useState('');
 
   useEffect(() => {
     const fetchPhotosHandler = async () => {
@@ -61,11 +63,13 @@ const App = () => {
     setImages([]);
   };
 
-  const openModal = (imgUrl, desc, altDesc) => {
+  const openModal = (imgUrl, desc, altDesc, user, likes) => {
     setModalIsOpen(true);
     setModalImg(imgUrl);
     setModalDesc(desc);
     setModalAlt(altDesc);
+    setModalUser(user);
+    setModalLikes(likes);
   };
 
   const closeModal = () => {
@@ -76,6 +80,7 @@ const App = () => {
     <div className={css.container}>
       <Toaster />
       <SearchBar setValue={setValue} resetSubmit={resetSubmit} />
+      {loading && <Loader />}
       {error && <ErrorMessage errorMessage={errorMessage} />}
       {images.length > 0 && (
         <>
@@ -83,13 +88,14 @@ const App = () => {
           {!lastPage && <LoadMoreBtn reachPage={reachPage} />}
         </>
       )}
-      {loading && <Loader />}
       <ImageModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         modalImg={modalImg}
         modalDesc={modalDesc}
         modalAlt={modalAlt}
+        modalUser={modalUser}
+        modalLikes={modalLikes}
       />
     </div>
   );

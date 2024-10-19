@@ -1,0 +1,12 @@
+.btn {
+  font-size: 18px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background-color: #cac3c3;
+  color: black;
+  border: 1px solid black;
+  &:hover,
+  &:focus {
+    background-color: #fff;
+  }
+}

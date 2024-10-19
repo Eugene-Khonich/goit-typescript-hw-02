@@ -29,6 +29,21 @@ a:hover {
 .ReactModal__Body--open {
   overflow: hidden;
 }
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+.ReactModal__Content--after-open {
+  transform: translateY(0);
+}
+
+.ReactModal__Content--before-close {
+  transform: translateY(50px);
+}
+
 body {
   margin: 0 auto;
   display: flex;

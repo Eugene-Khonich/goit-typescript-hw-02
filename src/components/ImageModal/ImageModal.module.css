@@ -1,0 +1,52 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 10px 40px 10px;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  max-width: 800px;
+  padding: 60px 20px 50px 20px;
+  background-color: rgba(51, 51, 51, 0.7);
+  border-radius: 30px;
+  transform: translateY(50px);
+  transition: transform 0.3s;
+}
+.img {
+  display: block;
+  width: 600px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: 20px;
+}
+.span {
+  color: red;
+}
+.btn {
+  position: absolute;
+  top: 20px;
+  right: 26px;
+  width: 24px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,18 +1,5 @@
+import css from './ImageModal.module.css';
 import Modal from 'react-modal';
-
-const customStyles = {
-  overlay: {
-    backgroundColor: 'black',
-  },
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: 'black',
-  },
-};
 
 Modal.setAppElement('#root');
 
@@ -22,18 +9,34 @@ const ImageModal = ({
   modalImg,
   modalDesc,
   modalAlt,
+  modalUser,
+  modalLikes,
 }) => {
   return (
-    <div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <p>{modalDesc}</p>
-        <img src={modalImg} alt={modalAlt} />
-      </Modal>
-    </div>
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      overlayClassName={css.overlay}
+      className={css.content}
+    >
+      <img src={modalImg} alt={modalAlt} className={css.img} />
+      <button className={css.btn} onClick={closeModal}>
+        ✖
+      </button>
+      <ul className={css.list}>
+        <line>
+          Description : <br />
+          {modalDesc}
+        </line>
+        <li>
+          Autor : <br />
+          {modalUser.first_name} {modalUser.last_name}
+        </li>
+        <li>
+          {modalLikes} <span className={css.span}>❤</span>
+        </li>
+      </ul>
+    </Modal>
   );
 };
 export default ImageModal;
