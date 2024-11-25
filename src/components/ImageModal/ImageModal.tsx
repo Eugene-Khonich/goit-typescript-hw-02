@@ -1,9 +1,9 @@
 import css from './ImageModal.module.css';
+import { FC } from 'react';
 import Modal from 'react-modal';
+import { ModalImgInfo } from '../types';
 
-Modal.setAppElement('#root');
-
-const ImageModal = ({
+const ImageModal: FC<ModalImgInfo> = ({
   modalIsOpen,
   closeModal,
   modalImg,
