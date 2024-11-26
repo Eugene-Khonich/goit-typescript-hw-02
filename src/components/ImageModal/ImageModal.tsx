@@ -1,16 +1,14 @@
 import css from './ImageModal.module.css';
 import Modal from 'react-modal';
+import { FC } from 'react';
+import { ImageModalProps } from '../types';
 
 Modal.setAppElement('#root');
 
-const ImageModal = ({
+const ImageModal: FC<ImageModalProps> = ({
   modalIsOpen,
   closeModal,
-  modalImg,
-  modalDesc,
-  modalAlt,
-  modalUser,
-  modalLikes,
+  modalImgInfo,
 }) => {
   return (
     <Modal
@@ -19,21 +17,25 @@ const ImageModal = ({
       overlayClassName={css.overlay}
       className={css.content}
     >
-      <img src={modalImg} alt={modalAlt} className={css.img} />
+      <img
+        src={modalImgInfo?.urls.regular}
+        alt={modalImgInfo?.alt_description}
+        className={css.img}
+      />
       <button className={css.btn} onClick={closeModal}>
         ✖
       </button>
       <ul className={css.list}>
         <line>
           Description : <br />
-          {modalDesc}
+          {modalImgInfo?.description}
         </line>
         <li>
           Autor : <br />
-          {modalUser.first_name} {modalUser.last_name}
+          {modalImgInfo?.user.first_name} {modalImgInfo?.user.last_name}
         </li>
         <li>
-          {modalLikes} <span className={css.span}>❤</span>
+          {modalImgInfo?.likes} <span className={css.span}>❤</span>
         </li>
       </ul>
     </Modal>

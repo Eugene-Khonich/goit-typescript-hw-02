@@ -1,4 +1,7 @@
-const ImageCard = ({
+import { FC } from 'react';
+import { ImageCardProps } from '../types';
+
+const ImageCard: FC<ImageCardProps> = ({
   urls,
   likes,
   description,
@@ -11,7 +14,7 @@ const ImageCard = ({
       src={urls.small}
       alt={alt_description}
       onClick={() => {
-        openModal(urls.regular, description, alt_description, user, likes);
+        openModal({ likes, urls, description, alt_description, user });
       }}
     />
   );

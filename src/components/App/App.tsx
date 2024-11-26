@@ -8,33 +8,31 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import ImageModal from '../ImageModal/ImageModal';
+import { ImgDetails, ModalImageData } from '../types';
+import { FC } from 'react';
 
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [value, setValue] = useState('');
-  const [lastPage, setLastPage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalImg, setModalImg] = useState('');
-  const [modalDesc, setModalDesc] = useState('');
-  const [modalAlt, setModalAlt] = useState('');
-  const [modalUser, setModalUser] = useState('');
-  const [modalLikes, setModalLikes] = useState('');
+const App: FC = () => {
+  const [images, setImages] = useState<ImgDetails[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [value, setValue] = useState<string>('');
+  const [lastPage, setLastPage] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [modalImgInfo, setModalImgInfo] = useState<ModalImageData>();
 
   useEffect(() => {
     const fetchPhotosHandler = async () => {
       try {
         setLoading(true);
         const data = await fetchImg(value, page);
-        const results = data.results;
+        const results: ImgDetails[] = data.results;
         setLastPage(page >= data.total_pages);
         setImages(prevData => [...prevData, ...results]);
       } catch (error) {
         setError(true);
-        setErrorMessage(error.message);
+        setErrorMessage((error as Error).message);
       } finally {
         setLoading(false);
       }
@@ -53,26 +51,22 @@ const App = () => {
     }
   });
 
-  const reachPage = () => {
+  const reachPage = (): void => {
     setPage(prevData => prevData + 1);
   };
 
-  const resetSubmit = () => {
+  const resetSubmit = (): void => {
     setPage(1);
     setValue('');
     setImages([]);
   };
 
-  const openModal = (imgUrl, desc, altDesc, user, likes) => {
+  const openModal = (modalImgInfo: ModalImageData): void => {
     setModalIsOpen(true);
-    setModalImg(imgUrl);
-    setModalDesc(desc);
-    setModalAlt(altDesc);
-    setModalUser(user);
-    setModalLikes(likes);
+    setModalImgInfo(modalImgInfo);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setModalIsOpen(false);
   };
 
@@ -81,7 +75,7 @@ const App = () => {
       <Toaster />
       <SearchBar setValue={setValue} resetSubmit={resetSubmit} />
       {loading && <Loader />}
-      {error && <ErrorMessage errorMessage={errorMessage} />}
+      {error && <ErrorMessage error={errorMessage} />}
       {images.length > 0 && (
         <>
           <ImageGallery images={images} openModal={openModal} />
@@ -91,11 +85,7 @@ const App = () => {
       <ImageModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        modalImg={modalImg}
-        modalDesc={modalDesc}
-        modalAlt={modalAlt}
-        modalUser={modalUser}
-        modalLikes={modalLikes}
+        modalImgInfo={modalImgInfo}
       />
     </div>
   );
