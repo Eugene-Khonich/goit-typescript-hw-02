@@ -26,10 +26,10 @@ const ImageModal: FC<ImageModalProps> = ({
         ✖
       </button>
       <ul className={css.list}>
-        <line>
+        <li>
           Description : <br />
           {modalImgInfo?.description}
-        </line>
+        </li>
         <li>
           Autor : <br />
           {modalImgInfo?.user.first_name} {modalImgInfo?.user.last_name}

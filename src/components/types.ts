@@ -62,3 +62,12 @@ export interface ImageModalProps {
   closeModal: () => void;
   modalImgInfo: ModalImageData | undefined;
 }
+
+export interface LoadMoreBtnProps {
+  reachPage: () => void;
+}
+
+export interface SearchBarProps {
+  setValue: (value: string) => void;
+  resetSubmit: () => void;
+}

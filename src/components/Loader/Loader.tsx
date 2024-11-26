@@ -1,7 +1,8 @@
 import css from './Loader.module.css';
 import { Hourglass } from 'react-loader-spinner';
+import { FC } from 'react';
 
-const Loader = () => {
+const Loader: FC = () => {
   return (
     <div className={css.loader}>
       <Hourglass
